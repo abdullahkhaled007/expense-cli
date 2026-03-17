@@ -1,7 +1,6 @@
 package expense
 
 import (
-	"golang/internal/expense"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -9,8 +8,8 @@ import (
 )
 
 func TestAddExpense(t *testing.T) {
-	store := expense.NewStore()
-	e, err := expense.NewExpense("Test Expense", 100.0, "This is a test expense")
+	store := NewStore()
+	e, err := NewExpense("Test Expense", 100.0, "This is a test expense")
 	require.NoError(t, err)
 
 	result, err := store.Add(e)
@@ -20,17 +19,17 @@ func TestAddExpense(t *testing.T) {
 }
 
 func TestAddNilExpense(t *testing.T) {
-	store := expense.NewStore()
+	store := NewStore()
 	_, err := store.Add(nil)
 	assert.Error(t, err)
 }
 
 func TestAddTwoExpenses(t *testing.T) {
-	store := expense.NewStore()
-	e1, err := expense.NewExpense("Test Expense 1", 100.0, "This is a test expense")
+	store := NewStore()
+	e1, err := NewExpense("Test Expense 1", 100.0, "This is a test expense")
 	require.NoError(t, err)
 
-	e2, err := expense.NewExpense("Test Expense 2", 200.0, "This is the second expense")
+	e2, err := NewExpense("Test Expense 2", 200.0, "This is the second expense")
 	require.NoError(t, err)
 
 	result1, err := store.Add(e1)
@@ -43,15 +42,15 @@ func TestAddTwoExpenses(t *testing.T) {
 }
 
 func TestList(t *testing.T) {
-	store := expense.NewStore()
+	store := NewStore()
 	currentList, err := store.List()
 	require.NoError(t, err)
 	assert.Equal(t, 0, len(currentList))
 }
 
 func TestListAfterAdd(t *testing.T) {
-	store := expense.NewStore()
-	e, err := expense.NewExpense("Test Expense", 100.0, "This is a test expense")
+	store := NewStore()
+	e, err := NewExpense("Test Expense", 100.0, "This is a test expense")
 	require.NoError(t, err)
 	_, err = store.Add(e)
 	require.NoError(t, err)
@@ -64,8 +63,8 @@ func TestListAfterAdd(t *testing.T) {
 }
 
 func TestListAfterDelete(t *testing.T) {
-	store := expense.NewStore()
-	e, err := expense.NewExpense("Test Expense", 100.0, "This is a test expense")
+	store := NewStore()
+	e, err := NewExpense("Test Expense", 100.0, "This is a test expense")
 	require.NoError(t, err)
 	_, err = store.Add(e)
 	require.NoError(t, err)
@@ -78,7 +77,7 @@ func TestListAfterDelete(t *testing.T) {
 }
 
 func TestDeleteMissingIndex(t *testing.T) {
-	store := expense.NewStore()
+	store := NewStore()
 	_, err := store.Delete(999)
 	assert.Error(t, err)
 }

@@ -1,7 +1,6 @@
 package expense
 
 import (
-	"golang/internal/expense"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -9,7 +8,7 @@ import (
 )
 
 func TestServiceAdd(t *testing.T) {
-	service := expense.NewService()
+	service := NewService()
 
 	addedExpense, err := service.Add("Test Expense", 100.0, "A test")
 	require.NoError(t, err)
@@ -18,7 +17,7 @@ func TestServiceAdd(t *testing.T) {
 }
 
 func TestServiceAdd2Expenses(t *testing.T) {
-	service := expense.NewService()
+	service := NewService()
 	addedExpense1, err := service.Add("Test Expense", 100.0, "A test")
 	require.NoError(t, err)
 	assert.Equal(t, 1, addedExpense1.ID)
@@ -28,26 +27,26 @@ func TestServiceAdd2Expenses(t *testing.T) {
 }
 
 func TestServiceAddEmptyName(t *testing.T) {
-	service := expense.NewService()
+	service := NewService()
 	_, err := service.Add("", 100.0, "A test")
 	require.Error(t, err)
 }
 
 func TestServiceAddNegValue(t *testing.T) {
-	service := expense.NewService()
+	service := NewService()
 	_, err := service.Add("Test Expense", -100.0, "A test")
 	require.Error(t, err)
 }
 
 func TestServiceEmptyList(t *testing.T) {
-	service := expense.NewService()
+	service := NewService()
 	expenses, err := service.List()
 	require.NoError(t, err)
 	assert.Equal(t, 0, len(expenses))
 }
 
 func TestServiceList(t *testing.T) {
-	service := expense.NewService()
+	service := NewService()
 	_, err := service.Add("Test Expense", 100.0, "A test")
 	require.NoError(t, err)
 	expenses, err := service.List()
@@ -56,7 +55,7 @@ func TestServiceList(t *testing.T) {
 }
 
 func TestServiceDelete(t *testing.T) {
-	service := expense.NewService()
+	service := NewService()
 	_, err := service.Add("Test Expense", 100.0, "A test")
 	require.NoError(t, err)
 	removedExpense, err := service.Delete(1)
@@ -65,7 +64,7 @@ func TestServiceDelete(t *testing.T) {
 }
 
 func TestServiceDeleteThenList(t *testing.T) {
-	service := expense.NewService()
+	service := NewService()
 	_, err := service.Add("Test Expense", 100.0, "A test")
 	require.NoError(t, err)
 	_, err = service.Delete(1)
@@ -76,7 +75,7 @@ func TestServiceDeleteThenList(t *testing.T) {
 }
 
 func TestServiceDeleteNotFound(t *testing.T) {
-	service := expense.NewService()
+	service := NewService()
 	_, err := service.Add("Test Expense", 100.0, "A test")
 	require.NoError(t, err)
 	_, err = service.Delete(999)

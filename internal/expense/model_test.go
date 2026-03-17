@@ -1,7 +1,6 @@
-package expense_test
+package expense
 
 import (
-	"golang/internal/expense"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -9,7 +8,7 @@ import (
 )
 
 func TestNewExpense_success(t *testing.T) {
-	e, err := expense.NewExpense("Test Expense", 100.0, "This is a test expense")
+	e, err := NewExpense("Test Expense", 100.0, "This is a test expense")
 	require.NoError(t, err)
 	require.NotNil(t, e)
 	assert.Equal(t, "Test Expense", e.Name)
@@ -18,13 +17,13 @@ func TestNewExpense_success(t *testing.T) {
 }
 
 func TestNewExpense_missingName(t *testing.T) {
-	_, err := expense.NewExpense("", 100.0, "This is a test expense")
+	_, err := NewExpense("", 100.0, "This is a test expense")
 	require.Error(t, err)
 	require.NotNilf(t, err, "expected error for empty name, got nil")
 }
 
 func TestNewExpense_negativePrice(t *testing.T) {
-	e, err := expense.NewExpense("Test Expense", -50.0, "This is a test expense")
+	e, err := NewExpense("Test Expense", -50.0, "This is a test expense")
 	require.Error(t, err)
 	require.Nil(t, e, "expected nil expense when error occurs, got non-nil")
 }
