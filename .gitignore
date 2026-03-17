@@ -1,0 +1,46 @@
+# JetBrains / GoLand / IntelliJ
+/.idea/
+*.iml
+
+# Runtime data (do not commit user/runtime data)
+/expenses.json
+
+# Editor directories and temp files
+.vscode/
+*~
+*.swp
+*.swo
+.#*
+*.orig
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Logs and temp
+*.log
+*.tmp
+tmp/
+.cache/
+
+# Go build outputs and test binary
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.test.exe
+/build/
+bin/
+
+# go test coverage
+coverage.out
+coverage.html
+
+# Environment / secret files
+.env
+.env.local
+
+node_modules/
+vendor/
+.idea_modules/
